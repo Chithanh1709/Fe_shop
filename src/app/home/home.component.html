@@ -1,0 +1,74 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo">MY FASHION</div>
+  <ul class="nav-links">
+    <li><a href="#">Đồ Nam</a></li>
+    <li><a href="#">Đồ Nữ</a></li>
+    <li><a href="#">Đồ Trẻ Em</a></li>
+    <li><a href="#">Đồ Bộ Gái</a></li>
+  </ul>
+  <div class="search-cart">
+    <input type="text" placeholder="Tìm kiếm..." />
+    <button>🔍</button>
+    <button>🛒</button>
+  </div>
+</nav>
+
+<!-- Banner -->
+<div class="banner">
+  <img src="https://picsum.photos/200?random=15" alt="Banner" />
+</div>
+
+<!-- Danh mục sản phẩm -->
+<section class="category">
+  <h2>Danh Mục Sản Phẩm</h2>
+
+  <h3>Đồ Nam</h3>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let item of menProducts">
+      <img [src]="item.image" alt="item.name" />
+      <p>{{ item.name }}</p>
+      <span>{{ item.price | currency:'VND' }}</span>
+    </div>
+  </div>
+
+  <h3>Đồ Nữ</h3>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let item of womenProducts">
+      <img [src]="item.image" alt="item.name" />
+      <p>{{ item.name }}</p>
+      <span>{{ item.price | currency:'VND' }}</span>
+    </div>
+  </div>
+
+  <h3>Đồ Trẻ Em</h3>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let item of kidsProducts">
+      <img [src]="item.image" alt="item.name" />
+      <p>{{ item.name }}</p>
+      <span>{{ item.price | currency:'VND' }}</span>
+    </div>
+  </div>
+
+  <button class="load-more">Xem Thêm</button>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-section">
+    <h4>Về Chúng Tôi</h4>
+    <p>Thông tin mô tả...</p>
+  </div>
+  <div class="footer-section">
+    <h4>Đường Dẫn</h4>
+    <ul>
+      <li><a href="#">Trang chủ</a></li>
+      <li><a href="#">Liên hệ</a></li>
+    </ul>
+  </div>
+  <div class="footer-section">
+    <h4>Thông Tin Liên Hệ</h4>
+    <p>Địa chỉ: Hà Nội</p>
+    <p>Email: contact&#64;myfashion.vn</p>
+  </div>
+</footer>

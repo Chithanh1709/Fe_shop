@@ -1,0 +1,17 @@
+<div class="login-container">
+    <h2>Đăng Nhập</h2>
+  
+    <form [formGroup]="loginForm"   (ngSubmit)="onSubmit()">
+      <input type="text" placeholder="Tên Tài Khoản" formControlName="username" />
+      <input type="password" placeholder="Mật Khẩu" formControlName="password" />
+  
+      <button type="submit" class="login-button">Đăng Nhập Ngay</button>
+    </form>
+  
+    <div class="links">
+      <a (click)="RecoverPass()">Quên Mật Khẩu?</a>
+      <br />
+      <a (click)="Regist()">Tạo Tài Khoản Ngay</a>
+    </div>
+  </div>
+  

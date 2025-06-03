@@ -1,0 +1,13 @@
+<div class="reset-container">
+    <h2>Lấy Lại Mật Khẩu</h2>
+  
+    <form [formGroup]="recoverForm" (ngSubmit)="onSubmit()">
+      <!-- <input type="text" placeholder="Tên Truy Cập" formControlName="username" /> -->
+      <input type="text" placeholder="Email hoặc Số Điện Thoại" formControlName="email" />
+      <input type="password" placeholder="Nhập Mật Khẩu Mới" formControlName="password" />
+      <input type="password" placeholder="Nhập Lại Mật Khẩu" formControlName="confirmPassword" />
+  
+      <button type="submit" class="submit-button">Hoàn Thành</button>
+    </form>
+  </div>
+  

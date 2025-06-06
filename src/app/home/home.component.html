@@ -1,74 +1,72 @@
-<!-- Navbar -->
+<!-- app.component.html -->
 <nav class="navbar">
-  <div class="logo">MY FASHION</div>
+  <div class="logo">CINEMA HUB</div>
   <ul class="nav-links">
-    <li><a href="#">Đồ Nam</a></li>
-    <li><a href="#">Đồ Nữ</a></li>
-    <li><a href="#">Đồ Trẻ Em</a></li>
-    <li><a href="#">Đồ Bộ Gái</a></li>
+    <li><a (click)="scrollToSection('now-showing')">Phim đang chiếu</a></li>
+    <li><a href="#">Phim sắp chiếu</a></li>
+    <li><a href="#">Suất chiếu</a></li>
+    <li><a href="#">Khuyến mãi</a></li>
   </ul>
   <div class="search-cart">
-    <input type="text" placeholder="Tìm kiếm..." />
+    <input type="text" placeholder="Tìm kiếm phim..." />
     <button>🔍</button>
-    <button>🛒</button>
+    <button>🎟️</button>
   </div>
 </nav>
 
 <!-- Banner -->
 <div class="banner">
-  <img src="https://picsum.photos/200?random=15" alt="Banner" />
+  <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=400&q=80" alt="Rạp phim hiện đại" />
 </div>
 
-<!-- Danh mục sản phẩm -->
+<!-- Danh mục phim -->
 <section class="category">
-  <h2>Danh Mục Sản Phẩm</h2>
+  <h2>Danh Mục Phim</h2>
 
-  <h3>Đồ Nam</h3>
+<h3 id="now-showing" class="section-title">🎬 Phim đang chiếu</h3>
+
+<div class="slider-wrapper">
+  <button (click)="prevSlide()" class="nav-btn left" [disabled]="currentIndex === 0">&lt;</button>
+
   <div class="product-grid">
-    <div class="product-card" *ngFor="let item of menProducts">
-      <img [src]="item.image" alt="item.name" />
-      <p>{{ item.name }}</p>
-      <span>{{ item.price | currency:'VND' }}</span>
+    <div class="product-card" *ngFor="let item of visibleMovies">
+      <img [src]="getMoviePoster(item.poster_path)" alt="{{ item.title }}" />
+      <div class="card-content">
+        <h4>{{ item.title }}</h4>
+        <!-- <p class="overview">{{ item.overview }}</p> -->
+        <p><strong>Ngày chiếu:</strong> {{ item.release_date }}</p>
+        <p><strong>Đánh giá:</strong> ⭐ {{ item.vote_average }}/10</p>
+      </div>
     </div>
   </div>
 
-  <h3>Đồ Nữ</h3>
-  <div class="product-grid">
-    <div class="product-card" *ngFor="let item of womenProducts">
-      <img [src]="item.image" alt="item.name" />
-      <p>{{ item.name }}</p>
-      <span>{{ item.price | currency:'VND' }}</span>
-    </div>
-  </div>
+  <button (click)="nextSlide()" class="nav-btn right" [disabled]="currentIndex + itemsPerSlide >= nowShowing.length">&gt;</button>
+</div>
 
-  <h3>Đồ Trẻ Em</h3>
-  <div class="product-grid">
-    <div class="product-card" *ngFor="let item of kidsProducts">
-      <img [src]="item.image" alt="item.name" />
-      <p>{{ item.name }}</p>
-      <span>{{ item.price | currency:'VND' }}</span>
-    </div>
-  </div>
 
-  <button class="load-more">Xem Thêm</button>
+
+
+  <button class="load-more">Xem Thêm Phim</button>
 </section>
 
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-section">
-    <h4>Về Chúng Tôi</h4>
-    <p>Thông tin mô tả...</p>
+    <h4>Về Rạp Chiếu</h4>
+    <p>Hệ thống rạp chiếu phim hiện đại với chất lượng hình ảnh và âm thanh hàng đầu</p>
   </div>
   <div class="footer-section">
     <h4>Đường Dẫn</h4>
     <ul>
       <li><a href="#">Trang chủ</a></li>
-      <li><a href="#">Liên hệ</a></li>
+      <li><a href="#">Lịch chiếu</a></li>
+      <li><a href="#">Giá vé</a></li>
     </ul>
   </div>
   <div class="footer-section">
     <h4>Thông Tin Liên Hệ</h4>
-    <p>Địa chỉ: Hà Nội</p>
-    <p>Email: contact&#64;myfashion.vn</p>
+    <p>Địa chỉ: 123 Đường Cinema, Hà Nội</p>
+    <p>Hotline: 1900 1234</p>
+    <p>Email: info&#64;cinemahub.vn</p>
   </div>
 </footer>

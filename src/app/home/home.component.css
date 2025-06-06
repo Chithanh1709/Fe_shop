@@ -21,18 +21,125 @@
 .category {
   padding: 20px;
 }
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 15px;
-  margin-bottom: 30px;
-}
-.product-card {
-  border: 1px solid #ddd;
-  padding: 10px;
+.section-title {
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
 }
+
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.product-grid {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-content h4 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.card-content .overview {
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 2;
+}
+
+.nav-btn:hover {
+  background-color: #555;
+}
+
+.nav-btn.left {
+  position: absolute;
+  left: -60px;
+}
+
+.nav-btn.right {
+  position: absolute;
+  right: -60px;
+}
+
+@media (max-width: 1000px) {
+  .product-card {
+    width: 250px;
+  }
+
+  .card-content .overview {
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-wrapper {
+    flex-direction: column;
+  }
+
+  .product-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-btn {
+    position: static;
+    margin: 10px;
+  }
+}
+
 .load-more {
+ 
   display: block;
   margin: 0 auto;
   padding: 10px 30px;
@@ -57,4 +164,12 @@
 .footer-section ul li a {
   color: white;
   text-decoration: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hoặc nếu muốn kiểm soát chi tiết hơn */
+#now-showing {
+  scroll-margin-top: 80px; /* Điều chỉnh theo chiều cao navbar */
 }

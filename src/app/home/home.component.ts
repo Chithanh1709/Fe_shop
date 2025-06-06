@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
+import { UserService } from '../Service/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,24 +9,60 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class HomeComponent {
-  menProducts = [
-    { name: 'Áo thun nam trắng', price: 199000, image: 'https://picsum.photos/200?random=1' },
-    { name: 'Áo len xanh', price: 299000, image: 'https://picsum.photos/200?random=2' },
-    { name: 'Áo thể thao', price: 259000, image: 'https://picsum.photos/200?random=3' },
-    { name: 'Áo len cổ lọ', price: 319000, image: 'https://picsum.photos/200?random=4' }
-  ];
+  nowShowing: any[] = [];
+  visibleMovies: any[] = [];
+  currentIndex = 0;
+  itemsPerSlide = 3;
+  currentPage = 1;
+  totalPages = 1;
 
-  womenProducts = [
-    { name: 'Áo len nữ', price: 269000, image: 'https://picsum.photos/200?random=5' },
-    { name: 'Áo nỉ hồng', price: 229000, image: 'https://picsum.photos/200?random=6' },
-    { name: 'Áo đen nữ', price: 279000, image: 'https://picsum.photos/200?random=7' },
-    { name: 'Áo len vàng', price: 289000, image: 'https://picsum.photos/200?random=8' }
-  ];
+  ngOnInit() {
+    this.loadMovies();
+  }
 
-  kidsProducts = [
-    { name: 'Áo bé trai xám', price: 159000, image: 'https://picsum.photos/200?random=9' },
-    { name: 'Áo bé gái trắng', price: 149000, image: 'https://picsum.photos/200?random=10' },
-    { name: 'Áo tím bé trai', price: 139000, image: 'https://picsum.photos/200?random=11' },
-    { name: 'Áo len bé gái', price: 169000, image: 'https://picsum.photos/200?random=12' }
-  ];
+  constructor(private viewportScroller: ViewportScroller,
+              private user: UserService
+  ) { }
+
+  scrollToSection(sectionId: string) {
+    this.viewportScroller.scrollToAnchor(sectionId);
+  }
+
+  loadMovies(): void {
+     this.user.getMovies(1).subscribe(data => {
+      this.nowShowing = data.results;
+      this.updateVisibleMovies();
+    });
+  }
+
+  getMoviePoster(posterPath: string): string {
+    return posterPath
+      ? `https://image.tmdb.org/t/p/w500${posterPath}`
+      : 'assets/no-image.jpg'; // Ảnh mặc định khi không có poster
+  }
+
+  changePage(newPage: number): void {
+    this.currentPage = newPage;
+    this.loadMovies();
+    window.scrollTo(0, 0);
+  }
+
+  updateVisibleMovies(): void {
+    this.visibleMovies = this.nowShowing.slice(this.currentIndex, this.currentIndex + this.itemsPerSlide);
+  }
+
+  nextSlide(): void {
+    if (this.currentIndex + this.itemsPerSlide < this.nowShowing.length) {
+      this.currentIndex += this.itemsPerSlide;
+      this.updateVisibleMovies();
+    }
+  }
+
+  prevSlide(): void {
+    if (this.currentIndex - this.itemsPerSlide >= 0) {
+      this.currentIndex -= this.itemsPerSlide;
+      this.updateVisibleMovies();
+    }
+  }
+
 }

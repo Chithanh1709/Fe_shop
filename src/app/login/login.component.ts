@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../Service/user.service';
+import {ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true, // nếu dùng standalone
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule ], 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'] // Sửa: styleUrls thay vì styleUrl
 
@@ -25,7 +26,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService) {
+    private userService: UserService,
+    private toast: ToastrService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -38,19 +40,19 @@ export class LoginComponent {
         .subscribe(
           (res) => {
             if (res.status === 'success') {
-              alert('Đăng nhập thành công!');
+              this.toast.success('Đăng nhập thành công!', 'Thông báo');
               this.router.navigate(['/home']);
             } else {
-              alert('Đăng nhập thất bại: ' + res.message);
+              this.toast.error('Đăng nhập thất bại: ' + res.message, 'Thông báo');
             }
           },
           (error) => {
             console.error('Lỗi đăng nhập:', error);
-            alert('Đăng nhập thất bại');
+            this.toast.error('Đăng nhập thất bại', 'Thông báo');
           }
         );
     } else {
-      alert('Vui lòng nhập đầy đủ thông tin đăng nhập.');
+      this.toast.warning('Vui lòng điền đầy đủ thông tin', 'Thông báo');
     }
   }
 

@@ -41,4 +41,10 @@ export class UserService {
   getMovies(page: number = 1): Observable<any> {
     return this.http.get(`${this.baseUrl}/movie/now_playing?api_key=${this.apiKey}&language=vi-VN&page=${page}`);
   }
+
+  getMovieDetails(movieId: number) {
+    return this.http.get(
+      `${this.baseUrl}/movie/${movieId}?api_key=${this.apiKey}&language=vi-VN&append_to_response=credits`
+    );
+  }
 }

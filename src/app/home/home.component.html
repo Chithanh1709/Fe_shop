@@ -2,7 +2,7 @@
 <nav class="navbar">
   <div class="logo">CINEMA HUB</div>
   <ul class="nav-links">
-    <li><a (click)="scrollToSection('now-showing')">Phim đang chiếu</a></li>
+    <li><a (click)="scrollToSection('now-showing')" style="cursor: pointer;">Phim đang chiếu</a></li>
     <li><a href="#">Phim sắp chiếu</a></li>
     <li><a href="#">Suất chiếu</a></li>
     <li><a href="#">Khuyến mãi</a></li>
@@ -10,7 +10,6 @@
   <div class="search-cart">
     <input type="text" placeholder="Tìm kiếm phim..." />
     <button>🔍</button>
-    <button>🎟️</button>
   </div>
 </nav>
 
@@ -29,7 +28,8 @@
   <button (click)="prevSlide()" class="nav-btn left" [disabled]="currentIndex === 0">&lt;</button>
 
   <div class="product-grid">
-    <div class="product-card" *ngFor="let item of visibleMovies">
+    <div class="product-card" *ngFor="let item of visibleMovies"
+    style="cursor: pointer" (click)="onMovieClick(item.id)">
       <img [src]="getMoviePoster(item.poster_path)" alt="{{ item.title }}" />
       <div class="card-content">
         <h4>{{ item.title }}</h4>
@@ -42,11 +42,6 @@
 
   <button (click)="nextSlide()" class="nav-btn right" [disabled]="currentIndex + itemsPerSlide >= nowShowing.length">&gt;</button>
 </div>
-
-
-
-
-  <button class="load-more">Xem Thêm Phim</button>
 </section>
 
 <!-- Footer -->

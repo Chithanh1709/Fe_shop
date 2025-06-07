@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { UserService } from '../Service/user.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule ,RouterModule],
+  standalone: true,
 })
 export class HomeComponent {
   nowShowing: any[] = [];
@@ -21,7 +23,8 @@ export class HomeComponent {
   }
 
   constructor(private viewportScroller: ViewportScroller,
-              private user: UserService
+    private user: UserService,
+    private router: Router,
   ) { }
 
   scrollToSection(sectionId: string) {
@@ -29,7 +32,7 @@ export class HomeComponent {
   }
 
   loadMovies(): void {
-     this.user.getMovies(1).subscribe(data => {
+    this.user.getMovies(1).subscribe(data => {
       this.nowShowing = data.results;
       this.updateVisibleMovies();
     });
@@ -64,5 +67,12 @@ export class HomeComponent {
       this.updateVisibleMovies();
     }
   }
+
+  onMovieClick(id:number): void {
+  this.router.navigate(['/seemore',id]);
+}
+
+
+
 
 }

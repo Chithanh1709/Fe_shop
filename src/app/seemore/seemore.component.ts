@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../Service/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-seemore',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './seemore.component.html',
   styleUrl: './seemore.component.css'
 })
@@ -42,6 +43,13 @@ export class SeemoreComponent {
       ? `https://image.tmdb.org/t/p/w500${posterPath}`
       : 'assets/images/no-poster.jpg';
   }
+
+  selectedDay: string = '07/06 - T7';
+
+selectDay(day: string) {
+  this.selectedDay = day;
+}
+
 
 
 }

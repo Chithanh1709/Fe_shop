@@ -1,0 +1,48 @@
+<div class="movie-container" *ngIf="!loading && movieDetails; else loadingOrError">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <span>Trang chủ</span> &gt;
+    <span class="highlight">{{ movieDetails.title }}</span>
+  </div>
+
+  <!-- Nội dung phim -->
+  <div class="movie-content">
+    <!-- Poster -->
+    <div class="poster">
+      <img [src]="getPosterUrl(movieDetails.poster_path)" [alt]="movieDetails.title" />
+    </div>
+
+    <!-- Chi tiết -->
+    <div class="details">
+      <h1 class="title">{{ movieDetails.title }}</h1>
+      <p class="description">{{ movieDetails.overview }}</p>
+
+      <ul class="info-list">
+        <!-- <li><strong>Đạo diễn:</strong> Đang cập nhật</li>
+        <li><strong>Diễn viên:</strong> Đang cập nhật</li> -->
+        <li><strong>Cốt truyện:</strong> {{ movieDetails.overview }}</li>
+        <li><strong>Thời lượng:</strong> {{ movieDetails.runtime }} phút</li>
+        <li><strong>Ngôn ngữ:</strong> {{ movieDetails.original_language}}</li>
+        <li><strong>Ngày khởi chiếu:</strong> {{ movieDetails.release_date }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ngày chiếu (giả định) -->
+  <div class="showtimes">
+    <div
+      class="day"
+      *ngFor="let day of ['07/06 - T7', '08/06 - CN', '09/06 - T2', '10/06 - T3', '11/06 - T4']"
+      [class.active]="day === selectedDay"
+      (click)="selectDay(day)"
+    >
+      {{ day }}
+    </div>
+  </div>
+</div>
+
+<!-- Loading & Error -->
+<ng-template #loadingOrError>
+  <div *ngIf="loading">Đang tải dữ liệu...</div>
+  <div *ngIf="error">Không thể tải thông tin phim. Vui lòng thử lại sau.</div>
+</ng-template>
